@@ -424,7 +424,7 @@ class RequestHandler(BaseProtocol):
             raise
         except asyncio.TimeoutError as exc:
             self.log_debug('Request handler timed out.', exc_info=exc)
-            resp = self.handle_error(request, 504)
+            resp = self.handle_error(request, 504, exc)
             reset = await self.finish_response(request, resp, start_time)
         except Exception as exc:
             resp = self.handle_error(request, 500, exc)
