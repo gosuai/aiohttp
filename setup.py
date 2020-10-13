@@ -1,5 +1,4 @@
 import pathlib
-import re
 import sys
 from distutils.command.build_ext import build_ext
 from distutils.errors import (
@@ -65,11 +64,6 @@ class ve_build_ext(build_ext):
 
 
 txt = (here / 'aiohttp' / '__init__.py').read_text('utf-8')
-try:
-    version = re.findall(r"^__version__ = '([^']+)'\r?$",
-                         txt, re.M)[0]
-except IndexError:
-    raise RuntimeError('Unable to determine version.')
 
 install_requires = [
     'attrs>=17.3.0',
@@ -98,7 +92,7 @@ tests_require = [
 
 args = dict(
     name='aiohttp',
-    version=version,
+    version='3.6.3',
     description='Async http client/server framework (asyncio)',
     long_description='\n\n'.join((read('README.rst'), read('CHANGES.rst'))),
     classifiers=[
